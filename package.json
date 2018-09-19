@@ -6,10 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev-server": "nodemon ./server.js --exec babel-node --presets env",
+    "dev-server": "nodemon ./src/server.js --exec babel-node --presets env",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "nodemon ./server.js --exec babel-node --presets env"
+    "start": "nodemon ./src/server.js --exec babel-node --presets env"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",

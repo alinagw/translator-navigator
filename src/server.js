@@ -18,7 +18,7 @@ app.use(BodyParser.json())
 
 // list of URLs (and their protocols) that this server responds to
 
-import MicrosoftTranslate from "./src/services/MicrosoftTranslate.js"
+import MicrosoftTranslate from "./services/MicrosoftTranslate.js"
 
 app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
