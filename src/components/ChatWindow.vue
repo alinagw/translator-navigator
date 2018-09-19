@@ -18,7 +18,7 @@
         </v-layout>
     </v-container>
     <v-card-actions class="send-message">
-        <v-textarea rows="1" auto-grow solo flat hide-details class="mr-3" v-model="chatInput" :color="chatColor" background-color="#F7F7FA" :placeholder="sendAMessageInstruction"></v-textarea>
+        <v-textarea rows="1" auto-grow solo flat hide-details class="mr-3" v-model="chatInput" :color="chatColor" background-color="#F7F7FA" :placeholder="sendAMessageInstruction" @keyup:enter="sendChat"></v-textarea>
         <v-btn icon @click="sendChat">
             <v-icon size="18px" :color="chatColor">send</v-icon>
         </v-btn>
