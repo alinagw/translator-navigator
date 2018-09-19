@@ -169,7 +169,7 @@ export default {
                 "Text": text
             }];
 
-            fetch(path.join(`${API_URL}`, "/translate"), {
+            fetch(path.join(`${API_URL}`, "/api/translate"), {
                     method: 'POST',
                     body: JSON.stringify({
                         langs: JSON.stringify(langs),
@@ -199,7 +199,7 @@ export default {
 
             var app = this;
 
-            fetch(path.join(`${API_URL}`, "/languages"), {
+            fetch(path.join(`${API_URL}`, "/api/languages"), {
                     method: 'GET'
                 }).then(response => response.json())
                 .then(data => {

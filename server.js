@@ -18,12 +18,18 @@ app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
 
-// list of URLs (and their protocols) that this server responds to
-
 const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
 
-app.use("/languages", express.static(MicrosoftTranslate.getLanguages));
-app.use("/translate", express.static(MicrosoftTranslate.translate));
+var router = Express.Router();
+router.get("/languages", MicrosoftTranslate.getLanguages)
+router.post("/translate", MicrosoftTranslate.translate)
+// list of URLs (and their protocols) that this server responds to
+
+app.use("/api", router);
+
+
+//app.get("/languages", MicrosoftTranslate.getLanguages);
+//app.post("/translate", MicrosoftTranslate.translate);
 
 app.use("/", serveStatic(__dirname));
 
