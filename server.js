@@ -18,14 +18,17 @@ app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
 
-const router = require("./src/router.js")
-
 // list of URLs (and their protocols) that this server responds to
-//app.get("/languages", MicrosoftTranslate.getLanguages);
-//app.post("/translate", MicrosoftTranslate.translate);
 
-app.use(serveStatic(__dirname));
-app.use("/api", router);
+const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
+
+app.get("/languages", MicrosoftTranslate.getLanguages);
+app.post("/translate", MicrosoftTranslate.translate);
+app.get("/", (req, res) => {
+    res.end();
+})
+
+//app.use("/", serveStatic(__dirname));
 
 // nothing useful for root URL to do
 /*app.get('/', (req, res) => {

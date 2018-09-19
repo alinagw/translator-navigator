@@ -60,8 +60,6 @@ import Vue from "vue"
 import ChatWindow from "./components/ChatWindow"
 import ErrorList from "./components/ErrorList"
 
-const path = require("path");
-
 import {
     API_URL
 } from './config'
@@ -169,7 +167,7 @@ export default {
                 "Text": text
             }];
 
-            fetch(path.join(`${API_URL}`, "/api/translate"), {
+            fetch(`${API_URL}/translate`, {
                     method: 'POST',
                     body: JSON.stringify({
                         langs: JSON.stringify(langs),
@@ -199,7 +197,7 @@ export default {
 
             var app = this;
 
-            fetch(path.join(`${API_URL}`, "/api/languages"), {
+            fetch(`${API_URL}/languages`, {
                     method: 'GET'
                 }).then(response => response.json())
                 .then(data => {
