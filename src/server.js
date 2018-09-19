@@ -3,7 +3,7 @@ const HOST = process.env.HOST || '127.0.0.1'
 const PORT = process.env.PORT || 3000
 
 // use Express as our router
-import Express from 'express'
+const Express = require('express')
 import BodyParser from 'body-parser'
 import Cors from 'cors'
 
@@ -30,7 +30,7 @@ app.post("/translate", MicrosoftTranslate.translate);
 })*/
 
 app.get('/', function(req, res) {
-    res.send("./../index.html");
+    //res.send("./../index.html");
  });
 
 // start server to listen for requests
