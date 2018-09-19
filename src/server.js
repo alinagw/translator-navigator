@@ -30,7 +30,7 @@ app.post("/translate", MicrosoftTranslate.translate);
 })*/
 
 app.get('/', function(req, res) {
-    res.render("./../index.html");
+    res.send("./../index.html");
  });
 
 // start server to listen for requests
