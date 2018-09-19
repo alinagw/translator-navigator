@@ -1,51 +1,248 @@
 <template>
-<div id="app">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-4">
-                <div id="languages" class="card-shadow d-flex flex-row justify-content-between">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle language-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Language 1
-                          </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle language-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Language 2
-                          </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="chat-window" class="card-shadow">
-                  <div class="d-flex flex-row">
-                  <input class="form-control" type="text" placeholder="Default input">
-                  <button class="btn btn-primary"><font-awesome-icon icon="microphone" /></button>
-                  </div>
-                </div>
-            </div>
-            <div class="col">
-                yeet
-            </div>
-        </div>
-    </div>
-</div>
+<v-app>
+    <v-toolbar flat prominent color="transparent" class="pt-3">
+        <v-toolbar-title>
+            <v-layout d-flex row align-center>
+                <v-img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/facebook/65/crocodile_1f40a.png" height="36px" width="36px" class="mr-3"></v-img>
+                <h5 class="text-uppercase spaced-letters">Navi<span class="green--text darken-1--text">gator</span><br>Trans<span class="purple--text darken-2--text">lator</span></h5>
+            </v-layout>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn depressed dark :disabled="!numErrors" color="error" @click="showErrors = true">
+            <v-icon small class="mr-2">error_outline</v-icon> Errors
+        </v-btn>
+        <v-btn depressed dark color="green darken-1" href="https://duke.qualtrics.com/jfe/form/SV_9HMzRUxVAz4de29">
+            <v-icon small class="mr-2">check</v-icon> Complete Interaction
+        </v-btn>
+    </v-toolbar>
+    <v-dialog v-model="showErrors" scrollable max-width="500px">
+        <error-list :hide="hideErrors" :errors="errors"></error-list>
+    </v-dialog>
+    <v-content class="pb-0">
+        <v-container fluid fill-height grid-list-lg>
+            <v-layout row wrap>
+                <v-flex xs12 sm6>
+                    <v-layout d-flex column fill-height>
+                        <v-flex>
+                            <v-select solo prepend-inner-icon="translate" placeholder="Language" hide-details :items="selectLangs" v-model="currLanguages[0]" @change="updateLanguages(0)" color="green darken-1">
+                            </v-select>
+                        </v-flex>
+                        <v-flex d-flex fill-height>
+                            <chat-window v-show="langsDefined" :chatID="0" :langs="langsAvail" :currLang="currLanguages[0]" :messages="chatMessages" :send-message="translateMessage" :report-error="reportError" :instructions="instructions"></chat-window>
+                        </v-flex>
+                    </v-layout>
+                </v-flex>
+                <v-flex xs12 sm6>
+                    <v-layout d-flex column fill-height>
+                        <v-flex>
+                            <v-select solo prepend-inner-icon="translate" placeholder="Language" hide-details :items="selectLangs" v-model="currLanguages[1]" @change="updateLanguages(1)" color="purple darken-2">
+                            </v-select>
+                        </v-flex>
+                        <v-flex d-flex fill-height>
+                            <chat-window v-show="langsDefined" :chatID="1" :langs="langsAvail" :currLang="currLanguages[1]" :messages="chatMessages" :send-message="translateMessage" :report-error="reportError"></chat-window>
+                        </v-flex>
+                    </v-layout>
+                </v-flex>
+                <v-flex xs12 text-xs-center grey--text v-if="!langsDefined">
+                    <h3 class="headline font-weight-light">Please select languages before proceeding.</h3>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-content>
+    <v-footer app color="transparent">
+        <v-flex text-xs-center grey--text class="caption text-uppercase font-weight-bold spaced-letters">&copy; 2018 Alina Walling</v-flex>
+    </v-footer>
+</v-app>
 </template>
 
 <script>
+import Vue from "vue"
+import ChatWindow from "./components/ChatWindow"
+import ErrorList from "./components/ErrorList"
+
+import {
+    API_URL
+} from './config'
+
 export default {
     name: 'app',
+    components: {
+        ChatWindow,
+        ErrorList
+    },
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            langsAvail: {},
+            currLanguages: ["", ""],
+            location: {},
+            chatMessages: [],
+            newMessage: {},
+            instructions: {},
+            errors: [],
+            showErrors: false
+        }
+    },
+
+    computed: {
+
+        langsDefined() {
+            if (this.currLanguages[0] && this.currLanguages[1]) {
+                return true;
+            }
+            return false;
+        },
+
+        numErrors() {
+            return this.errors.length;
+        },
+
+        selectLangs() {
+            var app = this;
+            var l = [];
+
+            for (var lang in this.langsAvail) {
+                l.push({
+                    text: app.langsAvail[lang]["name"] + " | " + app.langsAvail[lang]["nativeName"],
+                    value: lang
+                });
+            }
+
+            return l;
+        }
+    },
+
+    created: function () {
+        this.getLanguages();
+    },
+
+    watch: {
+        currLanguages() {
+            if (this.langsDefined) {
+                this.translateInstructions();
+            }
+        }
+    },
+
+    methods: {
+
+        translateMessage(sender, lang, text) {
+
+            this.newMessage = {
+                id: Date.now(),
+                sender: sender,
+                langSent: lang,
+                originalText: text,
+                translations: {}
+            }
+
+            this.translate(this.currLanguages, text, "chat");
+
+        },
+
+        sendMessage(data) {
+
+            var app = this;
+
+            if (data != null) {
+
+                var langDetected = data.detectedLanguage.language;
+                Vue.set(app.newMessage, "langDetected", langDetected);
+
+                for (var i = 0; i < data.translations.length; i++) {
+                    Vue.set(app.newMessage.translations, data.translations[i]["to"], data.translations[i]["text"]);
+                }
+
+                app.chatMessages.push(app.newMessage);
+                app.newMessage = {};
+
+            }
+
+        },
+
+        translate(langs, text, item) {
+
+            var app = this;
+
+            var content = [{
+                "Text": text
+            }];
+
+            fetch(`${API_URL}/translate`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        langs: JSON.stringify(langs),
+                        content: JSON.stringify(content)
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    var parsed = JSON.parse(data.body);
+                    //console.log(parsed[0]);
+
+                    if (item == "chat") {
+                        app.sendMessage(parsed[0]);
+                    } else {
+                        Vue.set(app.instructions, item, parsed[0]);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+        },
+
+        getLanguages() {
+
+            var app = this;
+
+            fetch(`${API_URL}/languages`, {
+                    method: 'GET'
+                }).then(response => response.json())
+                .then(data => {
+                    var parsed = JSON.parse(data.body);
+                    //console.log(parsed);
+                    app.langsAvail = parsed.translation;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
+        translateInstructions() {
+            this.translate(this.currLanguages, "Chat", "chatTitle");
+            this.translate(this.currLanguages, "Send a message...", "sendAMessage");
+        },
+
+        updateLanguages(index) {
+            var newLang = this.langsAvail[this.currLanguages[index]]["name"] + " | " + this.langsAvail[this.currLanguages[index]]["nativeName"];
+
+            this.chatMessages.push({
+                langChange: Date.now(),
+                langChanged: index,
+                newLang: newLang
+            });
+        },
+
+        reportError(lang, message) {
+
+           this.errors.push({
+                id: message.id,
+                fromLang: message.langSent,
+                toLang: lang,
+                fromLangText: message.originalText,
+                toLangText: message.translations[lang]
+            });
+
+        },
+
+        completeInteraction() {
+
+        },
+
+        hideErrors(hide) {
+            this.showErrors = hide;
         }
     }
 }
@@ -53,36 +250,16 @@ export default {
 
 <style>
 #app {
+    height: 100vh;
     background-color: #F7F7FA;
+    overflow-y: hidden;
 }
 
-.card-shadow {
-    border-radius: 12px;
-    -webkit-box-shadow: 0px 4px 16px 0px rgba(69, 91, 99, 0.08);
-    -moz-box-shadow: 0px 4px 16px 0px rgba(69, 91, 99, 0.08);
-    box-shadow: 0px 4px 16px 0px rgba(69, 91, 99, 0.08);
+.spaced-letters {
+    letter-spacing: 1.5px;
 }
 
-#languages {
-    background-color: #2A2E43;
-    margin-bottom: 12px;
-    padding: 8px 16px;
-}
-
-.language-button {
-  background-color: transparent;
-  color: white;
-}
-
-#chat-window {
-    height: 300px;
-    background-color: white;
-    padding: 16px;
-}
-
-.divider-v {
-  width: 1px;
-  background-color: #454F63;
-  height: 40px;
+.scroll {
+    overflow-y: auto;
 }
 </style>
