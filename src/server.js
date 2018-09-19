@@ -4,8 +4,8 @@ const PORT = process.env.PORT || 3000
 
 // use Express as our router
 const Express = require('express')
-import BodyParser from 'body-parser'
-import Cors from 'cors'
+const BodyParser = require('body-parser')
+const Cors = require('cors')
 
 // create express app
 const app = Express()
@@ -18,7 +18,7 @@ app.use(BodyParser.json())
 
 // list of URLs (and their protocols) that this server responds to
 
-import MicrosoftTranslate from "./services/MicrosoftTranslate.js"
+const MicrosoftTranslate = require("./services/MicrosoftTranslate.js")
 
 app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
