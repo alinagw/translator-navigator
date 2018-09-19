@@ -17,7 +17,6 @@ app.use(Cors())
 app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
-app.use("/", serveStatic(__dirname));
 
 // list of URLs (and their protocols) that this server responds to
 
@@ -25,6 +24,8 @@ const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
 
 app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
+
+app.use("/", serveStatic(__dirname));
 
 // nothing useful for root URL to do
 /*app.get('/', (req, res) => {
