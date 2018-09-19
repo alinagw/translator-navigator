@@ -71,23 +71,23 @@ export default {
 
         getChatInstruction() {
             var app = this;
-            /*for (var i = 0; i < this.instructions.chatTitle.translations.length; i++) {
+            for (var i = 0; i < this.instructions.chatTitle.translations.length; i++) {
                 if (app.instructions.chatTitle.translations[i]["to"] == app.currLang) {
                     return app.instructions.chatTitle.translations[i]["text"];
                 }
             }
-*/
+
             return "Chat";
 
         },
 
         getSendAMessageInstruction() {
             var app = this;
-           /* for (var i = 0; i < this.instructions.sendAMessage.translations.length; i++) {
+           for (var i = 0; i < this.instructions.sendAMessage.translations.length; i++) {
                 if (app.instructions.sendAMessage.translations[i]["to"] == app.currLang) {
                     return app.instructions.sendAMessage.translations[i]["text"];
                 }
-            }*/
+            }
 
             return "Send a message...";
 
