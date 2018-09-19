@@ -7,6 +7,7 @@ const Express = require('express')
 const BodyParser = require('body-parser')
 const Cors = require('cors')
 const serveStatic = require('serve-static');
+const path = require('path')
 
 // create express app
 const app = Express()
@@ -16,11 +17,11 @@ app.use(Cors())
 app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
-app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(__dirname, 'dist'));
 
 // list of URLs (and their protocols) that this server responds to
 
-const MicrosoftTranslate = require("./services/MicrosoftTranslate.js")
+const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
 
 app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
@@ -30,10 +31,6 @@ app.post("/translate", MicrosoftTranslate.translate);
     res.json({"message": 'Welcome to Navigator Translator!'});
     res.end();
 })*/
-
-app.get('/', function(req, res) {
-    //res.send("./../index.html");
- });
 
 // start server to listen for requests
 app.listen(PORT, function() {
