@@ -18,7 +18,7 @@
         </v-layout>
     </v-container>
     <v-card-actions class="send-message">
-        <v-textarea rows="1" auto-grow solo flat hide-details class="mr-3" v-model="chatInput" :color="chatColor" background-color="#F7F7FA" :placeholder="sendAMessageInstruction" @keyup.enter="sendChat"></v-textarea>
+        <v-textarea rows="1" auto-grow solo flat hide-details class="mr-3" v-model="chatInput" :color="chatColor" background-color="#F7F7FA" :placeholder="sendAMessageInstruction" @keydown.enter.exact.prevent @keyup.enter.exact="sendChat"></v-textarea>
         <v-btn icon @click="sendChat">
             <v-icon size="18px" :color="chatColor">send</v-icon>
         </v-btn>
@@ -28,6 +28,7 @@
 
 <script>
 import ChatMessage from "./ChatMessage.vue"
+import Vue from "vue"
 
 export default {
     name: 'ChatWindow',
@@ -45,8 +46,8 @@ export default {
     data() {
         return {
             chatInput: "",
-            chatInstruction: this.getChatInstruction(),
-            sendAMessageInstruction: this.getSendAMessageInstruction()
+            chatInstruction: "Chat",
+            sendAMessageInstruction: "Send a message..."
         }
     },
 
@@ -56,10 +57,23 @@ export default {
                 return "green darken-1";
             }
             return "purple darken-2";
-        },
+        }
 
         
 
+    },
+
+    watch: {
+        instructions() {
+            if (this.instructions != null) {
+                if (this.instructions.chatTitle != null) {
+                    this.getChatInstruction();
+                }
+                if (this.instructions.sendAMessage != null) {
+                    this.getSendAMessageInstruction();
+                }
+            }
+        }
     },
 
     methods: {
@@ -70,26 +84,21 @@ export default {
         },
 
         getChatInstruction() {
-            var app = this;
+
             for (var i = 0; i < this.instructions.chatTitle.translations.length; i++) {
-                if (app.instructions.chatTitle.translations[i]["to"] == app.currLang) {
-                    return app.instructions.chatTitle.translations[i]["text"];
+                if (this.instructions.chatTitle.translations[i]["to"] == this.currLang) {
+                    this.chatInstruction = this.instructions.chatTitle.translations[i]["text"];
                 }
             }
-
-            return "Chat";
 
         },
 
         getSendAMessageInstruction() {
-            var app = this;
-           for (var i = 0; i < this.instructions.sendAMessage.translations.length; i++) {
-                if (app.instructions.sendAMessage.translations[i]["to"] == app.currLang) {
-                    return app.instructions.sendAMessage.translations[i]["text"];
+            for (var i = 0; i < this.instructions.sendAMessage.translations.length; i++) {
+                if (this.instructions.sendAMessage.translations[i]["to"] == this.currLang) {
+                    this.sendAMessageInstruction = this.instructions.sendAMessage.translations[i]["text"];
                 }
             }
-
-            return "Send a message...";
 
         }
 

@@ -39,7 +39,7 @@
                             </v-select>
                         </v-flex>
                         <v-flex d-flex fill-height>
-                            <chat-window v-show="langsDefined" :chatID="1" :langs="langsAvail" :currLang="currLanguages[1]" :messages="chatMessages" :send-message="translateMessage" :report-error="reportError"></chat-window>
+                            <chat-window v-show="langsDefined" :chatID="1" :langs="langsAvail" :currLang="currLanguages[1]" :messages="chatMessages" :send-message="translateMessage" :report-error="reportError" :instructions="instructions"></chat-window>
                         </v-flex>
                     </v-layout>
                 </v-flex>
@@ -118,6 +118,7 @@ export default {
     watch: {
         currLanguages() {
             if (this.langsDefined) {
+                this.instructions = {};
                 this.translateInstructions();
             }
         }
