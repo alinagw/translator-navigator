@@ -22,8 +22,8 @@ app.use(BodyParser.json())
 
 const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
 
-app.get("/languages", MicrosoftTranslate.getLanguages);
-app.post("/translate", MicrosoftTranslate.translate);
+app.use("/languages", express.static(MicrosoftTranslate.getLanguages));
+app.use("/translate", express.static(MicrosoftTranslate.translate));
 
 app.use("/", serveStatic(__dirname));
 
