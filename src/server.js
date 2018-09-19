@@ -24,10 +24,14 @@ app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
 
 // nothing useful for root URL to do
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.json({"message": 'Welcome to Navigator Translator!'});
     res.end();
-})
+})*/
+
+app.get('/', function(req, res) {
+    res.render("./../index.html");
+ });
 
 // start server to listen for requests
 app.listen(PORT, function() {
