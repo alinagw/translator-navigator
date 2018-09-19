@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000
 const Express = require('express')
 const BodyParser = require('body-parser')
 const Cors = require('cors')
+const serveStatic = require('serve-static');
 
 // create express app
 const app = Express()
@@ -15,6 +16,7 @@ app.use(Cors())
 app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
+app.use(serveStatic(__dirname + "/dist"));
 
 // list of URLs (and their protocols) that this server responds to
 
