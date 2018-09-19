@@ -4,7 +4,7 @@
         <v-toolbar-title>
             <v-layout d-flex row align-center>
                 <v-img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/facebook/65/crocodile_1f40a.png" height="36px" width="36px" class="mr-3"></v-img>
-                <h5 class="text-uppercase spaced-letters">Navi<span class="green--text darken-1--text">gator</span><br>Trans<span class="purple--text darken-2--text">lator</span></h5>
+                <h5 class="text-uppercase spaced-letters">Trans<span class="purple--text darken-2--text">lator</span><br>Navi<span class="green--text darken-1--text">gator</span></h5>
             </v-layout>
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -167,7 +167,7 @@ export default {
                 "Text": text
             }];
 
-            fetch(`${API_URL}/translate`, {
+            fetch(`${API_URL}translate`, {
                     method: 'POST',
                     body: JSON.stringify({
                         langs: JSON.stringify(langs),
@@ -197,7 +197,7 @@ export default {
 
             var app = this;
 
-            fetch(`${API_URL}/languages`, {
+            fetch(`${API_URL}languages`, {
                     method: 'GET'
                 }).then(response => response.json())
                 .then(data => {

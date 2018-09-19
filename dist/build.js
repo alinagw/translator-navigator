@@ -11622,7 +11622,7 @@ module.exports = g;
                 "Text": text
             }];
 
-            fetch(`${__WEBPACK_IMPORTED_MODULE_3__config__["a" /* API_URL */]}/translate`, {
+            fetch(`${__WEBPACK_IMPORTED_MODULE_3__config__["a" /* API_URL */]}translate`, {
                 method: 'POST',
                 body: JSON.stringify({
                     langs: JSON.stringify(langs),
@@ -11649,7 +11649,7 @@ module.exports = g;
 
             var app = this;
 
-            fetch(`${__WEBPACK_IMPORTED_MODULE_3__config__["a" /* API_URL */]}/languages`, {
+            fetch(`${__WEBPACK_IMPORTED_MODULE_3__config__["a" /* API_URL */]}languages`, {
                 method: 'GET'
             }).then(response => response.json()).then(data => {
                 var parsed = JSON.parse(data.body);
@@ -12414,7 +12414,7 @@ process.umask = function() { return 0; };
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_026388b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f562581_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(30);
 function injectStyle (ssrContext) {
   __webpack_require__(14)
 }
@@ -12434,7 +12434,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_026388b6_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7f562581_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -12455,7 +12455,7 @@ var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(1)("7daabd7f", content, true, {});
+var update = __webpack_require__(1)("681879f4", content, true, {});
 
 /***/ }),
 /* 15 */
@@ -12733,7 +12733,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 "use strict";
 // URL for find back end's API
 //export const API_URL = 'http://localhost:3000'
-const API_URL = 'https://navigator-translator.herokuapp.com/';
+const API_URL = 'https://navigator-translator.herokuapp.com';
 /* harmony export (immutable) */ __webpack_exports__["a"] = API_URL;
 
 
@@ -12742,7 +12742,7 @@ const API_URL = 'https://navigator-translator.herokuapp.com/';
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-toolbar',{staticClass:"pt-3",attrs:{"flat":"","prominent":"","color":"transparent"}},[_c('v-toolbar-title',[_c('v-layout',{attrs:{"d-flex":"","row":"","align-center":""}},[_c('v-img',{staticClass:"mr-3",attrs:{"src":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/facebook/65/crocodile_1f40a.png","height":"36px","width":"36px"}}),_vm._v(" "),_c('h5',{staticClass:"text-uppercase spaced-letters"},[_vm._v("Navi"),_c('span',{staticClass:"green--text darken-1--text"},[_vm._v("gator")]),_c('br'),_vm._v("Trans"),_c('span',{staticClass:"purple--text darken-2--text"},[_vm._v("lator")])])],1)],1),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('v-btn',{attrs:{"depressed":"","dark":"","disabled":!_vm.numErrors,"color":"error"},on:{"click":function($event){_vm.showErrors = true}}},[_c('v-icon',{staticClass:"mr-2",attrs:{"small":""}},[_vm._v("error_outline")]),_vm._v(" Errors\n        ")],1),_vm._v(" "),_c('v-btn',{attrs:{"depressed":"","dark":"","color":"green darken-1","href":"https://duke.qualtrics.com/jfe/form/SV_9HMzRUxVAz4de29"}},[_c('v-icon',{staticClass:"mr-2",attrs:{"small":""}},[_vm._v("check")]),_vm._v(" Complete Interaction\n        ")],1)],1),_vm._v(" "),_c('v-dialog',{attrs:{"scrollable":"","max-width":"500px"},model:{value:(_vm.showErrors),callback:function ($$v) {_vm.showErrors=$$v},expression:"showErrors"}},[_c('error-list',{attrs:{"hide":_vm.hideErrors,"errors":_vm.errors}})],1),_vm._v(" "),_c('v-content',{staticClass:"pb-0"},[_c('v-container',{attrs:{"fluid":"","fill-height":"","grid-list-lg":""}},[_c('v-layout',{attrs:{"row":"","wrap":""}},[_c('v-flex',{attrs:{"xs12":"","sm6":""}},[_c('v-layout',{attrs:{"d-flex":"","column":"","fill-height":""}},[_c('v-flex',[_c('v-select',{attrs:{"solo":"","prepend-inner-icon":"translate","placeholder":"Language","hide-details":"","items":_vm.selectLangs,"color":"green darken-1"},on:{"change":function($event){_vm.updateLanguages(0)}},model:{value:(_vm.currLanguages[0]),callback:function ($$v) {_vm.$set(_vm.currLanguages, 0, $$v)},expression:"currLanguages[0]"}})],1),_vm._v(" "),_c('v-flex',{attrs:{"d-flex":"","fill-height":""}},[_c('chat-window',{directives:[{name:"show",rawName:"v-show",value:(_vm.langsDefined),expression:"langsDefined"}],attrs:{"chatID":0,"langs":_vm.langsAvail,"currLang":_vm.currLanguages[0],"messages":_vm.chatMessages,"send-message":_vm.translateMessage,"report-error":_vm.reportError,"instructions":_vm.instructions}})],1)],1)],1),_vm._v(" "),_c('v-flex',{attrs:{"xs12":"","sm6":""}},[_c('v-layout',{attrs:{"d-flex":"","column":"","fill-height":""}},[_c('v-flex',[_c('v-select',{attrs:{"solo":"","prepend-inner-icon":"translate","placeholder":"Language","hide-details":"","items":_vm.selectLangs,"color":"purple darken-2"},on:{"change":function($event){_vm.updateLanguages(1)}},model:{value:(_vm.currLanguages[1]),callback:function ($$v) {_vm.$set(_vm.currLanguages, 1, $$v)},expression:"currLanguages[1]"}})],1),_vm._v(" "),_c('v-flex',{attrs:{"d-flex":"","fill-height":""}},[_c('chat-window',{directives:[{name:"show",rawName:"v-show",value:(_vm.langsDefined),expression:"langsDefined"}],attrs:{"chatID":1,"langs":_vm.langsAvail,"currLang":_vm.currLanguages[1],"messages":_vm.chatMessages,"send-message":_vm.translateMessage,"report-error":_vm.reportError}})],1)],1)],1),_vm._v(" "),(!_vm.langsDefined)?_c('v-flex',{attrs:{"xs12":"","text-xs-center":"","grey--text":""}},[_c('h3',{staticClass:"headline font-weight-light"},[_vm._v("Please select languages before proceeding.")])]):_vm._e()],1)],1)],1),_vm._v(" "),_c('v-footer',{attrs:{"app":"","color":"transparent"}},[_c('v-flex',{staticClass:"caption text-uppercase font-weight-bold spaced-letters",attrs:{"text-xs-center":"","grey--text":""}},[_vm._v("© 2018 Alina Walling")])],1)],1)}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('v-app',[_c('v-toolbar',{staticClass:"pt-3",attrs:{"flat":"","prominent":"","color":"transparent"}},[_c('v-toolbar-title',[_c('v-layout',{attrs:{"d-flex":"","row":"","align-center":""}},[_c('v-img',{staticClass:"mr-3",attrs:{"src":"https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/facebook/65/crocodile_1f40a.png","height":"36px","width":"36px"}}),_vm._v(" "),_c('h5',{staticClass:"text-uppercase spaced-letters"},[_vm._v("Trans"),_c('span',{staticClass:"purple--text darken-2--text"},[_vm._v("lator")]),_c('br'),_vm._v("Navi"),_c('span',{staticClass:"green--text darken-1--text"},[_vm._v("gator")])])],1)],1),_vm._v(" "),_c('v-spacer'),_vm._v(" "),_c('v-btn',{attrs:{"depressed":"","dark":"","disabled":!_vm.numErrors,"color":"error"},on:{"click":function($event){_vm.showErrors = true}}},[_c('v-icon',{staticClass:"mr-2",attrs:{"small":""}},[_vm._v("error_outline")]),_vm._v(" Errors\n        ")],1),_vm._v(" "),_c('v-btn',{attrs:{"depressed":"","dark":"","color":"green darken-1","href":"https://duke.qualtrics.com/jfe/form/SV_9HMzRUxVAz4de29"}},[_c('v-icon',{staticClass:"mr-2",attrs:{"small":""}},[_vm._v("check")]),_vm._v(" Complete Interaction\n        ")],1)],1),_vm._v(" "),_c('v-dialog',{attrs:{"scrollable":"","max-width":"500px"},model:{value:(_vm.showErrors),callback:function ($$v) {_vm.showErrors=$$v},expression:"showErrors"}},[_c('error-list',{attrs:{"hide":_vm.hideErrors,"errors":_vm.errors}})],1),_vm._v(" "),_c('v-content',{staticClass:"pb-0"},[_c('v-container',{attrs:{"fluid":"","fill-height":"","grid-list-lg":""}},[_c('v-layout',{attrs:{"row":"","wrap":""}},[_c('v-flex',{attrs:{"xs12":"","sm6":""}},[_c('v-layout',{attrs:{"d-flex":"","column":"","fill-height":""}},[_c('v-flex',[_c('v-select',{attrs:{"solo":"","prepend-inner-icon":"translate","placeholder":"Language","hide-details":"","items":_vm.selectLangs,"color":"green darken-1"},on:{"change":function($event){_vm.updateLanguages(0)}},model:{value:(_vm.currLanguages[0]),callback:function ($$v) {_vm.$set(_vm.currLanguages, 0, $$v)},expression:"currLanguages[0]"}})],1),_vm._v(" "),_c('v-flex',{attrs:{"d-flex":"","fill-height":""}},[_c('chat-window',{directives:[{name:"show",rawName:"v-show",value:(_vm.langsDefined),expression:"langsDefined"}],attrs:{"chatID":0,"langs":_vm.langsAvail,"currLang":_vm.currLanguages[0],"messages":_vm.chatMessages,"send-message":_vm.translateMessage,"report-error":_vm.reportError,"instructions":_vm.instructions}})],1)],1)],1),_vm._v(" "),_c('v-flex',{attrs:{"xs12":"","sm6":""}},[_c('v-layout',{attrs:{"d-flex":"","column":"","fill-height":""}},[_c('v-flex',[_c('v-select',{attrs:{"solo":"","prepend-inner-icon":"translate","placeholder":"Language","hide-details":"","items":_vm.selectLangs,"color":"purple darken-2"},on:{"change":function($event){_vm.updateLanguages(1)}},model:{value:(_vm.currLanguages[1]),callback:function ($$v) {_vm.$set(_vm.currLanguages, 1, $$v)},expression:"currLanguages[1]"}})],1),_vm._v(" "),_c('v-flex',{attrs:{"d-flex":"","fill-height":""}},[_c('chat-window',{directives:[{name:"show",rawName:"v-show",value:(_vm.langsDefined),expression:"langsDefined"}],attrs:{"chatID":1,"langs":_vm.langsAvail,"currLang":_vm.currLanguages[1],"messages":_vm.chatMessages,"send-message":_vm.translateMessage,"report-error":_vm.reportError}})],1)],1)],1),_vm._v(" "),(!_vm.langsDefined)?_c('v-flex',{attrs:{"xs12":"","text-xs-center":"","grey--text":""}},[_c('h3',{staticClass:"headline font-weight-light"},[_vm._v("Please select languages before proceeding.")])]):_vm._e()],1)],1)],1),_vm._v(" "),_c('v-footer',{attrs:{"app":"","color":"transparent"}},[_c('v-flex',{staticClass:"caption text-uppercase font-weight-bold spaced-letters",attrs:{"text-xs-center":"","grey--text":""}},[_vm._v("© 2018 Alina Walling")])],1)],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
