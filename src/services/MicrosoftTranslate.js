@@ -19,7 +19,7 @@ let get_guid = function () {
     });
 }
 
-function getLanguages(req, res) {
+exports.getLanguages = function(req, res) {
 
         request.get({
             url: "https://" + host + languages_path,
@@ -39,7 +39,7 @@ function getLanguages(req, res) {
 
     }
 
-function translate(req, res) {
+exports.translate = function(req, res) {
 
         var langs = JSON.parse(req.body.langs);
         var lang1 = langs[0];
