@@ -17,7 +17,7 @@ app.use(Cors())
 app.use(BodyParser.urlencoded({ extended: true }))
 // parse JSON form data
 app.use(BodyParser.json())
-app.use(serveStatic(__dirname));
+app.use("/", serveStatic(__dirname));
 
 // list of URLs (and their protocols) that this server responds to
 
