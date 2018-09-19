@@ -37,7 +37,7 @@ function getLanguages(req, res) {
             }
         });
 
-    },
+    }
 
 function translate(req, res) {
 
