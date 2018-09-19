@@ -6,8 +6,6 @@ const PORT = process.env.PORT || 3000
 const Express = require('express')
 const BodyParser = require('body-parser')
 const Cors = require('cors')
-const serveStatic = require('serve-static');
-const path = require('path')
 
 // create express app
 const app = Express()
@@ -25,8 +23,9 @@ const MicrosoftTranslate = require("./src/services/MicrosoftTranslate.js")
 app.get("/languages", MicrosoftTranslate.getLanguages);
 app.post("/translate", MicrosoftTranslate.translate);
 app.get("/", (req, res) => {
+    res.json({"message": 'Welcome to Translator Navigator!'});
     res.end();
-})
+});
 
 //app.use("/", serveStatic(__dirname));
 

@@ -12733,7 +12733,7 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 "use strict";
 // URL for find back end's API
 //export const API_URL = 'http://localhost:3000'
-const API_URL = 'https://navigator-translator.herokuapp.com';
+const API_URL = 'https://translator-navigator.herokuapp.com';
 /* harmony export (immutable) */ __webpack_exports__["a"] = API_URL;
 
 
