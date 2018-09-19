@@ -31,7 +31,7 @@ app.use("/api", router);
 //app.get("/languages", MicrosoftTranslate.getLanguages);
 //app.post("/translate", MicrosoftTranslate.translate);
 
-app.use("/", serveStatic(__dirname));
+app.use("/", serveStatic(path.join(__dirname, "/index.html"));
 
 // nothing useful for root URL to do
 /*app.get('/', (req, res) => {
