@@ -5,7 +5,7 @@
 const request = require("request");
 
 // Replace the subscriptionKey string value with your valid subscription key.
-const subscriptionKey = "b633600298384f86b97cbf2d92ffc9fd";
+const subscriptionKey = "98ea037b28e14ed9ab6faaab2f0bb6a5";
 
 const host = 'api.cognitive.microsofttranslator.com';
 const languages_path = '/languages?api-version=3.0';
